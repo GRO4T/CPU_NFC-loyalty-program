@@ -2,6 +2,8 @@
 (
     cd ./nfclp || exit
 
+    python manage.py collectstatic
+
     python manage.py migrate
 
     python manage.py ensure_superuser --no-input \
