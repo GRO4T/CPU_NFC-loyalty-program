@@ -11,7 +11,8 @@ def index(request: HttpRequest) -> HttpResponse:
 
 @require_GET
 def get_points(request: HttpRequest, card_id: str) -> JsonResponse:
-    return JsonResponse({"points": 500})
+    account = Account.objects.get(payment_card_serial=card_id)
+    return JsonResponse({"points": account.points})
 
 
 @require_POST
