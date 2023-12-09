@@ -16,6 +16,7 @@ def get_points(request: HttpRequest, card_id: str) -> JsonResponse:
 
 
 @require_POST
-def register_account(request: HttpRequest, card_id: str) -> JsonResponse:
+def register_account(request: HttpRequest, card_id: str) -> HttpResponse:
     new_account = Account(payment_card_serial=card_id, points=0)
     new_account.save()
+    return HttpResponse()
