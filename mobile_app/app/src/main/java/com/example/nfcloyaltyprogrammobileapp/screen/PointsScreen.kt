@@ -12,12 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
 import com.example.nfcloyaltyprogrammobileapp.ui.theme.NFCLoyaltyProgramMobileAppTheme
 import com.example.nfcloyaltyprogrammobileapp.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun MainScreen(viewModel: MainViewModel) {
+internal fun LoginScreen(viewModel: ViewModel, points: Int) {
     val context = LocalContext.current
 
     NFCLoyaltyProgramMobileAppTheme {
@@ -26,7 +27,7 @@ internal fun MainScreen(viewModel: MainViewModel) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Hold your card against the smartphone to login")
+                Text("You have $points points")
             }
         }
     }
@@ -34,6 +35,6 @@ internal fun MainScreen(viewModel: MainViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun MainPreview() {
-    MainScreen(MainViewModel())
+fun LoginPreview() {
+    LoginScreen(MainViewModel(), 0)
 }
