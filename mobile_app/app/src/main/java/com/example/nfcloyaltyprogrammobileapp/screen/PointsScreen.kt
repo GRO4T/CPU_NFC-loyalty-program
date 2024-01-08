@@ -18,7 +18,7 @@ import com.example.nfcloyaltyprogrammobileapp.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun LoginScreen(viewModel: ViewModel, points: Int) {
+internal fun PointScreen(viewModel: ViewModel, points: Int) {
     val context = LocalContext.current
 
     NFCLoyaltyProgramMobileAppTheme {
@@ -36,5 +36,5 @@ internal fun LoginScreen(viewModel: ViewModel, points: Int) {
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-    LoginScreen(MainViewModel(), 0)
+    PointScreen(MainViewModel(), 0)
 }
