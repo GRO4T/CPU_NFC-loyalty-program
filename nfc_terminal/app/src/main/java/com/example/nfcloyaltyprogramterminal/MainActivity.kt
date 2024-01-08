@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.example.nfcloyaltyprogramterminal.network.ApiService
 import com.example.nfcloyaltyprogramterminal.ui.theme.NFCLoyaltyProgramTerminalTheme
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -40,6 +39,7 @@ class MainActivity : NfcAdapter.ReaderCallback, ComponentActivity() {
             .build()
             .create(ApiService::class.java)
     }
+
     override fun onStart() {
         super.onStart()
         NfcAdapter.getDefaultAdapter(this)?.enableReaderMode(
@@ -66,6 +66,7 @@ class MainActivity : NfcAdapter.ReaderCallback, ComponentActivity() {
             viewModel.updateStatus("${viewModel.points} points have been added to $cardId")
         }
     }
+
     override fun onTagDiscovered(tag: Tag) {
         tagSerialNumber = tag.id.joinToString(separator = ":") { byte -> "%02x".format(byte) }
         Log.d("NfcComponentActivity", "Discovered tag with serial number: $tagSerialNumber")

@@ -1,9 +1,9 @@
-package com.example.nfcloyaltyprogramterminal.network
+package com.example.nfcloyaltyprogramterminal
 
-import com.example.nfcloyaltyprogramterminal.data_structs.StatusResponse
 import retrofit2.Response
 import retrofit2.http.POST
 import retrofit2.http.Path
+
 
 interface ApiService {
     @POST("accounts/{cardId}")
