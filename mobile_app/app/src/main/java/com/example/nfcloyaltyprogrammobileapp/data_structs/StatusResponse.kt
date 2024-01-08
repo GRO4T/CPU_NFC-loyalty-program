@@ -1,3 +1,5 @@
 package com.example.nfcloyaltyprogramterminal.data_structs
 
-data class StatusResponse(val status: String)
+import com.google.gson.annotations.SerializedName
+
+data class CardPointsResponse(@SerializedName("points") val points: Int)

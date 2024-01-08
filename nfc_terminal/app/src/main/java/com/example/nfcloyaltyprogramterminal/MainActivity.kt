@@ -55,14 +55,24 @@ class MainActivity : NfcAdapter.ReaderCallback, ComponentActivity() {
         NfcAdapter.getDefaultAdapter(this)?.disableReaderMode(this)
     }
 
-    private fun addPoints(cardId: String) {
+    private fun addPoints(cardId: String) { // Will also create card in db if does not exist
         lifecycleScope.launch {
-            try {
-//                val response = apiService.registerAccount(cardId) // TODO(Slawek)
-                Log.d("ApiActivity", "Registered!")
-            } catch (e: Exception) {
-                Log.e("ApiActivity", "Registration Error", e)
+            val cardResponse = apiService.getCard(cardId)
+            Log.d("ApiActivity", "Received $cardResponse")
+
+            if (!cardResponse.isSuccessful) {
+                Log.i("ApiActivity", "Card $cardId does not exist. Attempting creation")
+                val registerResponse = apiService.registerCard(cardId)
+
+                if (!registerResponse.isSuccessful) {
+                    Log.e("ApiActivity", "Failed to register card, code ${registerResponse.code()}")
+                    viewModel.updateStatus("ERROR: Unable to register card")
+                    return@launch
+                }
             }
+            val response = apiService.addPoints(cardId, RequestBodyPoints(viewModel.points))
+            Log.i("ApiActivity", "Added ${viewModel.points} point(s) for card $cardId")
+            Log.d("ApiActivity", "Received $response")
             viewModel.updateStatus("${viewModel.points} points have been added to $cardId")
         }
     }
