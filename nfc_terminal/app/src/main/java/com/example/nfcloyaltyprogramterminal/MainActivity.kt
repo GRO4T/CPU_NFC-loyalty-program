@@ -58,8 +58,9 @@ class MainActivity : NfcAdapter.ReaderCallback, ComponentActivity() {
     private fun addPoints(cardId: String) {
         lifecycleScope.launch {
             try {
-//                val response = apiService.registerAccount(cardId) // TODO(Slawek)
-                Log.d("ApiActivity", "Registered!")
+                val response = apiService.addPoints(cardId, RequestBodyPoints(viewModel.points))
+                Log.i("ApiActivity", "Added ${viewModel.points} point(s) for card $cardId")
+                Log.d("ApiActivity", "Received $response")
             } catch (e: Exception) {
                 Log.e("ApiActivity", "Registration Error", e)
             }
